@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="" datatype="plaintext" original="messages" date="2018-11-29T14:27:37Z">
+        <header>
+            <generator>OwnScript</generator>
+        </header>
+        <body>
+            <trans-unit id="sys_file_reference.media_width">
+            	<source>Media width in HTML</source>
+                <target>Media Breite im HTML</target>
+            </trans-unit>
+            <trans-unit id="sys_file_reference.picture_variants">
+            	<source>Variants for different views</source>
+                <target>Varianten für verschiedene Ansichten</target>
+            </trans-unit>
+            <trans-unit id="sys_file_reference.media_width.desktop">
+                <source>Desktop view</source>
+                <target>Desktop Ansicht</target>
+            </trans-unit>
+            <trans-unit id="sys_file_reference.media_width.tablet">
+                <source>Tablet view</source>
+                <target>Tablet Ansicht</target>
+            </trans-unit>
+            <trans-unit id="sys_file_reference.media_width.mobile">
+                <source>Mobile view</source>
+                <target>Smartphone Ansicht</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

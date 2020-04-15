@@ -5,7 +5,7 @@ declare(strict_types=1);
 call_user_func(function () {
     $newColumns = [
         'picture_variants' => [
-            'label' => 'LLL:EXT:picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.picture_variants',
+            'label' => 'LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.picture_variants',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('picture_variants', [
                 'appearance' => [
                     'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
@@ -49,14 +49,14 @@ call_user_func(function () {
             ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])
         ],
         'media_width' => [
-            'label' => 'LLL:EXT:picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.media_width',
+            'label' => 'LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.media_width',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['Desktop', '(min-width: 1200px)'],
-                    ['Tablet', '(min-width: 768px)'],
-                    ['Mobile', '(min-width: 300px)'],
+                    ['LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.media_width.desktop', '(min-width: 1200px)'],
+                    ['LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.media_width.tablet', '(min-width: 768px)'],
+                    ['LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.media_width.mobile', '(min-width: 300px)'],
                 ],
             ],
             'displayCond' => 'FIELD:tablenames:=:sys_file_reference'
