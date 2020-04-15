@@ -1,6 +1,6 @@
 {
-  "name": "sudhaus7/picture",
-  "description": "(Sudhaus7) Picture",
+  "name": "sudhaus7/responsive-picture",
+  "description": "(Sudhaus7) Responsive Picture",
   "version": "1.0.0",
   "type": "typo3-cms-extension",
   "license": "MIT",
@@ -31,20 +31,20 @@
   },
   "extra": {
     "typo3/cms": {
-      "extension-key": "picture",
+      "extension-key": "responsive_picture",
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
       "web-dir": ".Build/public"
     }
   },
   "autoload": {
     "psr-4": {
-      "SUDHAUS7\\Picture\\": "Classes/"
+      "SUDHAUS7\\ResponsivePicture\\": "Classes/"
     }
   },
   "scripts": {
     "post-autoload-dump": [
       "mkdir -p .Build/public/typo3conf/ext/",
-      "[ -L .Build/public/typo3conf/ext/picture ] || ln -snvf ../../../../. .Build/public/typo3conf/ext/picture"
+      "[ -L .Build/public/typo3conf/ext/responsive_picture ] || ln -snvf ../../../../. .Build/public/typo3conf/ext/responsive_picture"
     ]
   }
 }
