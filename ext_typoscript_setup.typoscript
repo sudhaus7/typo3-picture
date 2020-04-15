@@ -18,3 +18,9 @@ tt_content.image {
 		}
 	}
 }
+
+lib.contentElement {
+	partialRootPaths {
+		10 = EXT:picture/Resources/Private/Partials
+	}
+}
