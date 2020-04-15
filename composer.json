@@ -44,7 +44,9 @@
   "scripts": {
     "post-autoload-dump": [
       "mkdir -p .Build/public/typo3conf/ext/",
-      "[ -L .Build/public/typo3conf/ext/responsive_picture ] || ln -snvf ../../../../. .Build/public/typo3conf/ext/responsive_picture"
+      "[ -L .Build/public/typo3conf/ext/responsive_picture ] || ln -snvf ../../../../. .Build/public/typo3conf/ext/responsive_picture",
+      "vendor/bin/typo3cms install:generatepackagestates",
+      "vendor/bin/typo3cms install:extensionsetupifpossible"
     ]
   }
 }

@@ -21,6 +21,6 @@ tt_content.image {
 
 lib.contentElement {
 	partialRootPaths {
-		10 = EXT:picture/Resources/Private/Partials
+		1 = EXT:picture/Resources/Private/Partials
 	}
 }
