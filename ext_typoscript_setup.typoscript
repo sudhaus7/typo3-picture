@@ -1,0 +1,20 @@
+tt_content.image {
+	dataProcessing {
+		30 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+		30 {
+			table = sys_file_reference
+			where.stdWrap.wrap = tablenames='sys_file_reference' and fieldname='picture_variants' and uid_foreign in (select uid from sys_file_reference where tablenames='tt_content' and uid_foreign=|)
+			where.stdWrap.field = uid
+			as = variants
+			dataProcessing {
+				10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+				10 {
+					references {
+						fieldName = picture_variants
+					}
+					as = variant
+				}
+			}
+		}
+	}
+}
