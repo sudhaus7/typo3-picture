@@ -68,9 +68,4 @@ call_user_func(function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_file_reference', $newColumns);
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('sys_file_reference', 'imageoverlayPalette','--linebreak--,picture_variants', 'after:crop');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('sys_file_reference', 'variantsPalette','media_width', 'after:title');
-
-    $GLOBALS['TCA']['sys_file_reference']['columns']['link']['displayCond'] = 'FIELD:tablenames:!=:sys_file_reference';
-    $GLOBALS['TCA']['sys_file_reference']['columns']['title']['displayCond'] = 'FIELD:tablenames:!=:sys_file_reference';
-    $GLOBALS['TCA']['sys_file_reference']['columns']['alternative']['displayCond'] = 'FIELD:tablenames:!=:sys_file_reference';
-    $GLOBALS['TCA']['sys_file_reference']['columns']['description']['displayCond'] = 'FIELD:tablenames:!=:sys_file_reference';
 });
