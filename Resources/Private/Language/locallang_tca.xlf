@@ -20,6 +20,9 @@
             <trans-unit id="sys_file_reference.media_width.mobile">
                 <source>Mobile view</source>
             </trans-unit>
+            <trans-unit id="sys_file_reference.variantsPalette">
+            	<source>Variants</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -25,6 +25,10 @@
                 <source>Mobile view</source>
                 <target>Smartphone Ansicht</target>
             </trans-unit>
+            <trans-unit id="sys_file_reference.variantsPalette">
+                <source>Variants</source>
+                <target>Varianten</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
