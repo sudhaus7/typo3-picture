@@ -1,7 +1,7 @@
 <?php
 
 
-namespace SUDHAUS7\Picture\Overrides;
+namespace SUDHAUS7\ResponsivePicture\Overrides;
 
 use PDO;
 use TYPO3\CMS\Core\Database\ConnectionPool;
