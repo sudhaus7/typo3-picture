@@ -9,6 +9,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Frontend\Resource\FileCollector;
 
+/**
+ * Class FileReference
+ *
+ * @package SUDHAUS7\Picture\Overrides
+ */
 class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
 {
 
@@ -16,7 +21,13 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
      * @var null|array
      */
     protected $variants = null;
-
+    
+    /**
+     * FileReference constructor.
+     *
+     * @param array $fileReferenceData
+     * @param null $factory
+     */
     public function __construct(array $fileReferenceData, $factory = null)
     {
         parent::__construct($fileReferenceData, $factory);
