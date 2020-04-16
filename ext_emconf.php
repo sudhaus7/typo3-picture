@@ -1,7 +1,7 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => '(Sudhaus7) Picture',
+    'title' => '(Sudhaus7) Responsive Picture',
     'description' => 'Add media variations to the Image / filereference Element including crop support using the image and source tags with fallback to img',
     'category' => 'module',
     'shy' => 0,
@@ -24,7 +24,7 @@ $EM_CONF[$_EXTKEY] = [
     'CGLcompliance_note' => '',
     'constraints' => [
         'depends' => [
-            'typo3' => '6.2.0-10.4.99'
+            'typo3' => '9.5.0-10.4.99'
         ],
         'conflicts' => [
         ],
