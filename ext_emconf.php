@@ -2,10 +2,10 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => '(Sudhaus7) Picture',
-    'description' => 'Picture parser',
+    'description' => 'Add media variations to the Image / filereference Element including crop support using the image and source tags with fallback to img',
     'category' => 'module',
     'shy' => 0,
-    'version' => '1.0.1',
+    'version' => '0.9.0',
     'dependencies' => '',
     'conflicts' => '',
     'priority' => '',

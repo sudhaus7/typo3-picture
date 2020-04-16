@@ -1,7 +1,8 @@
 {
   "name": "sudhaus7/picture",
-  "description": "(Sudhaus7) Picture",
-  "version": "1.0.0",
+  "description": "(Sudhaus7) Picture : Add media variations to the Image / filereference Element including crop support using the image and source tags with fallback to img",
+  "version": "0.9.0",
+  "keywords": ["typo3","media","query","img","picture","responsive"],
   "type": "typo3-cms-extension",
   "license": "MIT",
   "authors": [
