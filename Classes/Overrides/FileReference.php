@@ -5,8 +5,8 @@ namespace SUDHAUS7\ResponsivePicture\Overrides;
 
 use PDO;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Resource\FileCollector;
 
 /**
  * Class FileReference
@@ -20,7 +20,12 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
      * @var null|array
      */
     protected $variants = null;
-    
+
+    /**
+     * @var ResourceFactory
+     */
+    private $factory;
+
     /**
      * FileReference constructor.
      *
@@ -30,6 +35,7 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
     public function __construct(array $fileReferenceData, $factory = null)
     {
         parent::__construct($fileReferenceData, $factory);
+        $this->factory = GeneralUtility::makeInstance(ResourceFactory::class);
         $this->getVariants();
     }
 
@@ -41,31 +47,31 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
         if ($this->variants === null) {
             $this->variants = [];
 
-            $fileCollector = GeneralUtility::makeInstance(FileCollector::class);
             $properties = $this->getProperties();
-            
-            $db = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_reference');
 
-            $result = $db->select('*')
-                ->from('sys_file_reference')
-                ->where(
-                    $db->expr()->andX(...[
-                        $db->expr()->eq('uid_foreign', $properties['uid']),
-                        $db->expr()->eq('tablenames', $db->quote('sys_file_reference'))
-                    ])
-                )
-                ->orderBy('sorting_foreign')
-                ->execute();
-            $uids = [];
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                $uids[]=$row['uid'];
-            }
-            if (!empty($uids)) {
-                $fileCollector->addFileReferences($uids);
-                $this->variants = $fileCollector->getFiles();
+            // this doesn't need to run if we actually are a variant already
+            if ($properties['tablenames'] !== 'sys_file_reference'
+                && $properties['fieldname'] !== 'picture_variants') {
+                
+                $db = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_reference');
+
+                $result = $db->select('*')
+                    ->from('sys_file_reference')
+                    ->where(
+                        $db->expr()->andX(...[
+                            $db->expr()->eq('uid_foreign', $properties['uid']),
+                            $db->expr()->eq('tablenames', $db->quote('sys_file_reference')),
+                            $db->expr()->eq('fieldname', $db->quote('picture_variants')),
+                        ])
+                    )
+                    ->orderBy('sorting_foreign')
+                    ->execute();
+
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $this->variants[] = $this->factory->getFileReferenceObject($row['uid'], $row);
+                }
             }
         }
-
         return $this->variants;
     }
 }
