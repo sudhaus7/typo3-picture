@@ -6,7 +6,6 @@ namespace SUDHAUS7\ResponsivePicture\Overrides;
 use PDO;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Frontend\Resource\FileCollector;
 
 /**
@@ -44,8 +43,8 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
 
             $fileCollector = GeneralUtility::makeInstance(FileCollector::class);
             $properties = $this->getProperties();
-            $om = GeneralUtility::makeInstance(ObjectManager::class);
-            $db = $om->get(ConnectionPool::class)->getQueryBuilderForTable('sys_file_reference');
+            
+            $db = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_reference');
 
             $result = $db->select('*')
                 ->from('sys_file_reference')
