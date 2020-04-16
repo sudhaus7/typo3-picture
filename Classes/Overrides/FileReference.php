@@ -20,12 +20,12 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
      * @var null|array
      */
     protected $variants = null;
-    
+
     /**
      * @var ResourceFactory
      */
     private $factory;
-    
+
     /**
      * FileReference constructor.
      *
@@ -49,25 +49,28 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
 
             $properties = $this->getProperties();
 
-            $db = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_reference');
-
-            $result = $db->select('*')
-                ->from('sys_file_reference')
-                ->where(
-                    $db->expr()->andX(...[
-                        $db->expr()->eq('uid_foreign', $properties['uid']),
-                        $db->expr()->eq('tablenames', $db->quote('sys_file_reference')),
-                        $db->expr()->eq('fieldname', $db->quote('picture_variants')),
-                    ])
-                )
-                ->orderBy('sorting_foreign')
-                ->execute();
-            
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                $this->variants[] = $this->factory->getFileReferenceObject($row['uid'],$row);
+            // this doesn't need to run if we actually are a variant already
+            if ($properties['tablenames'] !== 'sys_file_reference'
+                && $properties['tablenames'] !== 'picture_variants') {
                 
+                $db = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_reference');
+
+                $result = $db->select('*')
+                    ->from('sys_file_reference')
+                    ->where(
+                        $db->expr()->andX(...[
+                            $db->expr()->eq('uid_foreign', $properties['uid']),
+                            $db->expr()->eq('tablenames', $db->quote('sys_file_reference')),
+                            $db->expr()->eq('fieldname', $db->quote('picture_variants')),
+                        ])
+                    )
+                    ->orderBy('sorting_foreign')
+                    ->execute();
+
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $this->variants[] = $this->factory->getFileReferenceObject($row['uid'], $row);
+                }
             }
-            
         }
         return $this->variants;
     }
