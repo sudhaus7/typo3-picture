@@ -51,7 +51,7 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
 
             // this doesn't need to run if we actually are a variant already
             if ($properties['tablenames'] !== 'sys_file_reference'
-                && $properties['tablenames'] !== 'picture_variants') {
+                && $properties['fieldname'] !== 'picture_variants') {
                 
                 $db = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_reference');
 
