@@ -5,6 +5,8 @@ namespace SUDHAUS7\ResponsivePicture\Overrides;
 
 use PDO;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Resource\FileRepository;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Resource\FileCollector;
 
@@ -22,6 +24,11 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
     protected $variants = null;
     
     /**
+     * @var ResourceFactory
+     */
+    private $factory;
+    
+    /**
      * FileReference constructor.
      *
      * @param array $fileReferenceData
@@ -30,6 +37,7 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
     public function __construct(array $fileReferenceData, $factory = null)
     {
         parent::__construct($fileReferenceData, $factory);
+        $this->factory = GeneralUtility::makeInstance(ResourceFactory::class);
         $this->getVariants();
     }
 
@@ -43,7 +51,7 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
 
             $fileCollector = GeneralUtility::makeInstance(FileCollector::class);
             $properties = $this->getProperties();
-            
+
             $db = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_file_reference');
 
             $result = $db->select('*')
@@ -51,21 +59,20 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
                 ->where(
                     $db->expr()->andX(...[
                         $db->expr()->eq('uid_foreign', $properties['uid']),
-                        $db->expr()->eq('tablenames', $db->quote('sys_file_reference'))
+                        $db->expr()->eq('tablenames', $db->quote('sys_file_reference')),
+                        $db->expr()->eq('fieldname', $db->quote('picture_variants')),
                     ])
                 )
                 ->orderBy('sorting_foreign')
                 ->execute();
-            $uids = [];
+            
             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                $uids[]=$row['uid'];
+                //$uids[]=$row['uid'];
+                $this->variants[] = $this->factory->getFileReferenceObject($row['uid'],$row);
+                
             }
-            if (!empty($uids)) {
-                $fileCollector->addFileReferences($uids);
-                $this->variants = $fileCollector->getFiles();
-            }
+            
         }
-
         return $this->variants;
     }
 }
