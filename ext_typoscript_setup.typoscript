@@ -1,5 +1,3 @@
-
-
 lib.contentElement {
 	partialRootPaths {
 		1 = EXT:picture/Resources/Private/Partials
