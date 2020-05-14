@@ -1,7 +1,7 @@
 {
   "name": "sudhaus7/responsive-picture",
   "description": "(Sudhaus7) Responsive Picture : Add media variations to the Image / filereference Element including crop support using the image and source tags with fallback to img",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "keywords": ["typo3","media","query","img","picture","responsive"],
   "type": "typo3-cms-extension",
   "license": "MIT",
