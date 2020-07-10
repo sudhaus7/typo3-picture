@@ -1,0 +1,50 @@
+plugin.tx_testsite {
+	persistence {
+		classes {
+			SUDHAUS7\TestSite\Domain\Model\Comment {
+				mapping {
+					columns {
+						tstamp.mapOnProperty = tstamp
+					}
+				}
+			}
+			SUDHAUS7\TestSite\Domain\Model\Comment {
+				newRecordStoragePid = 2
+				mapping {
+					columns {
+						tstamp.mapOnProperty = tstamp
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+config.tx_extbase {
+	persistence {
+		classes {
+			SUDHAUS7\TestSite\Domain\Model\Comment {
+				mapping {
+					columns {
+						tstamp.mapOnProperty = tstamp
+					}
+				}
+			}
+			SUDHAUS7\TestSite\Domain\Model\Comment {
+				newRecordStoragePid = 2
+				mapping {
+					columns {
+						tstamp.mapOnProperty = tstamp
+					}
+				}
+			}
+		}
+	}
+}
+
+tt_content.list.20.testsite_list = USER_INT
+tt_content.list.20.testsite_latest = USER_INT
+tt_content.list.20.testsite_detail = USER_INT
+

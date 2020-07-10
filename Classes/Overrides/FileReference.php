@@ -31,15 +31,12 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
      *
      * @param array $fileReferenceData
      * @param null $factory
-     * @param bool $useVariants
      */
-    public function __construct(array $fileReferenceData, $factory = null, bool $useVariants = true)
+    public function __construct(array $fileReferenceData, $factory = null)
     {
         parent::__construct($fileReferenceData, $factory);
         $this->factory = GeneralUtility::makeInstance(ResourceFactory::class);
-        if ($useVariants) {
-            $this->getVariants();
-        }
+    
     }
 
     /**

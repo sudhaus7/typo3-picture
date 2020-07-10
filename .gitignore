@@ -51,7 +51,7 @@ fabric.properties
 /composer.lock
 /.Build/
 
-tests/_output/*
+Tests/_output/*
 /Documentation-GENERATED-temp
 
 /*.php
