@@ -55,6 +55,7 @@
       "vendor/bin/typo3cms install:generatepackagestates",
       "vendor/bin/typo3cms install:extensionsetupifpossible"
     ],
-    "compiledocumentation": "docker-compose run --rm t3docmake"
+    "compiledocumentation": "docker-compose run --rm t3docmake",
+
   }
 }
