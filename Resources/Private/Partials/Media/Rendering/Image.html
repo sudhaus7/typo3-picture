@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <picture>
     <f:for each="{file.variants}" as="variant">
-        <source media="{variant.mediaquery}" srcset="{f:uri.image(image: '{variant}', maxWidth: '{variant.variationmaxwidth}', height: '{variant.variationmaxheight}')}">
+        <source media="{variant.mediaquery}" srcset="{f:uri.image(image: '{variant}', maxWidth: '{variant.variationmaxwidth}', maxHeight: '{variant.variationmaxheight}')}">
     </f:for>
     <f:media alt="{file.alternative}" class="image-embed-item" file="{file}" height="{dimensions.height}" loading="{settings.media.lazyLoading}" style="width:auto;height:auto;max-width:100%" title="{file.title}" width="{dimensions.width}" />
 </picture>

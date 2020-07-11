@@ -119,7 +119,7 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
             && $properties['fieldname'] === 'picture_variants';
     }
     
-    public function markAsVariation(string $mediaquerykey) : void
+    private function markAsVariation(string $mediaquerykey) : void
     {
         $this->getProperties();
         $this->mediaquerykey = $mediaquerykey;

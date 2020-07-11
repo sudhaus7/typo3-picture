@@ -22,7 +22,7 @@
       en
 
 :Description:
-      Including responsive pictures into TYPO3
+      Adding responsive images to TYPO3
 
 :Keywords:
       responsive, image, picture, media, query
@@ -49,4 +49,6 @@
 
    Introduction/Index
    Configuration/Index
+   Frontend/Index
    Targets
+   Thanks/Index
