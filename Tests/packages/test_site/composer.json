@@ -1,0 +1,23 @@
+{
+  "name": "sudhaus7/test-site",
+  "description": "Test Site",
+  "version": "1.0.0",
+  "type": "typo3-cms-extension",
+  "authors": [
+    {
+      "name": "Frank Berger",
+      "role": "Developer",
+      "email": "f.berger@sudhaus7.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "SUDHAUS7\\TestSite\\": "Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "test_site"
+    }
+  }
+}

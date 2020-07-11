@@ -5,19 +5,19 @@
 
 .. include:: ../Includes.txt
 
+.. _frontendusage:
 
+Usage in the Frontend
+---------------------
 
-.. _configuration:
-
-Configuration
--------------
-
-In this section you will find the available configuration options for the Frontend and the Backend
-
+This is divided in 2 parts:
 
 .. toctree::
     :maxdepth: 5
     :titlesonly:
 
-    Frontend/Index
-    Backend/Index
+    Model/Index
+    Fluid/Index
+
+
+

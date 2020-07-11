@@ -15,6 +15,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
 {
+    
+    /**
+     * @var null|string
+     */
+    protected $mediaquerykey= null;
 
     /**
      * @var null|array
@@ -31,15 +36,12 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
      *
      * @param array $fileReferenceData
      * @param null $factory
-     * @param bool $useVariants
      */
-    public function __construct(array $fileReferenceData, $factory = null, bool $useVariants = true)
+    public function __construct(array $fileReferenceData, $factory = null)
     {
         parent::__construct($fileReferenceData, $factory);
         $this->factory = GeneralUtility::makeInstance(ResourceFactory::class);
-        if ($useVariants) {
-            $this->getVariants();
-        }
+    
     }
 
     /**
@@ -70,11 +72,139 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
                     ->orderBy('sorting_foreign')
                     ->execute();
 
+                $collectedmediaquery = [];
+                $unsortedvariants = [];
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    $this->variants[] = $this->factory->getFileReferenceObject($row['uid'], $row);
+                    $variant = $this->factory->getFileReferenceObject($row['uid'], $row);
+                    $collectedmediaquery[] = $variant->getProperties()['media_width'];
+                    $unsortedvariants[] = $variant;
+                }
+                if(isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['autocreatevariations']) && (bool)$GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['autocreatevariations']) {
+
+                    foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $k=>$config) {
+                        if (!in_array($config['key'],$collectedmediaquery)) {
+                            $variant = clone $this;
+                            $variant->markAsVariation($config['key']);
+                            $unsortedvariants[] = $variant;
+                        }
+                    }
+    
+                }
+    
+                // second pass for sorting
+                if (isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.'])) {
+    
+                    foreach ( $GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $k => $config ) {
+                        foreach ( $unsortedvariants as $variant ) {
+                            if ( $variant->getProperties()['media_width'] === $config['key'] ) {
+                                $this->variants[] = $variant;
+                            }
+                        }
+                    }
                 }
             }
         }
         return $this->variants;
+    }
+    
+    public function isVariant() : bool
+    {
+        
+        if ($this->mediaquerykey !== null) return true;
+        
+        $properties = $this->getProperties();
+    
+        // this doesn't need to run if we actually are a variant already
+        return $properties['tablenames'] === 'sys_file_reference'
+            && $properties['fieldname'] === 'picture_variants';
+    }
+    
+    private function markAsVariation(string $mediaquerykey) : void
+    {
+        $this->getProperties();
+        $this->mediaquerykey = $mediaquerykey;
+        $this->mergedProperties['media_width'] = $mediaquerykey;
+        $this->mergedProperties['tablenames'] = 'sys_file_reference';
+        $this->mergedProperties['fieldname'] = 'picture_variants';
+    }
+    
+   
+    
+    /**
+     * @return string
+     */
+    public function getMediaquery() : string
+    {
+        if ($this->isVariant()) {
+            if ($this->mediaquerykey !== null) {
+                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key=>$config) {
+                    if ($config['key'] === $this->mediaquerykey) {
+                        return $config['mediaquery'];
+                    }
+                }
+            }
+            $properties = $this->getProperties();
+            if (isset($properties['media_width']) && isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'])) {
+    
+                foreach ( $GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key => $config ) {
+                    if ( $config['key'] === $properties['media_width'] ) {
+                        return $config['mediaquery'];
+                    }
+                }
+            }
+        }
+        return '';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getVariationmaxwidth() : string
+    {
+        if ($this->isVariant()) {
+            if ($this->mediaquerykey !== null) {
+                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key=>$config) {
+                    if ($config['key'] === $this->mediaquerykey) {
+                        return $config['maxW'];
+                    }
+                }
+            }
+            $properties = $this->getProperties();
+            if (isset($properties['media_width']) && isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'])) {
+                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key=>$config) {
+                    if ($config['key'] === $properties['media_width']) {
+                        return $config['maxW'];
+                    }
+                }
+            }
+        }
+        return '';
+        
+    }
+    
+    /**
+     * @return string
+     */
+    public function getVariationmaxheight() : string
+    {
+        $height = '';
+        if ($this->isVariant()) {
+            if ($this->mediaquerykey !== null) {
+                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key=>$config) {
+                    if ($config['key'] === $this->mediaquerykey) {
+                        return $config['maxH'];
+                    }
+                }
+            }
+            $properties = $this->getProperties();
+            if (isset($properties['media_width']) && isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'])) {
+                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key=>$config) {
+                    if ($config['key'] === $properties['media_width']) {
+                        $height = $config['maxH'];
+                    }
+                }
+            }
+        }
+        return '';
     }
 }

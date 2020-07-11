@@ -1,5 +1,28 @@
 lib.contentElement {
 	partialRootPaths {
-		1 = EXT:picture/Resources/Private/Partials
+		1 = EXT:responsive_picture/Resources/Private/Partials/
+	}
+}
+config.tx_responsivepicture {
+	autocreatevariations = 1
+	sizes {
+		10 {
+			key = (min-width: 1200px)
+			mediaquery = (min-width: 1200px)
+			maxW = 1600
+			maxH = 1600
+		}
+		20 {
+			key = (min-width: 768px)
+			mediaquery = (min-width: 768px)
+			maxW = 1024
+			maxH = 1024
+		}
+		30 {
+			key = (min-width: 300px)
+			mediaquery = (min-width: 300px)
+			maxW = 600
+			maxH = 600
+		}
 	}
 }

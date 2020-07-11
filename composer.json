@@ -1,7 +1,7 @@
 {
   "name": "sudhaus7/responsive-picture",
   "description": "(Sudhaus7) Responsive Picture : Add media variations to the Image / filereference Element including crop support using the image and source tags with fallback to img",
-  "version": "0.9.8",
+  "version": "1.0.0",
   "keywords": ["typo3","media","query","img","picture","responsive"],
   "type": "typo3-cms-extension",
   "license": "MIT",
@@ -15,6 +15,12 @@
       "role": "Developer"
     }
   ],
+  "repositories": [
+    {
+      "type": "path",
+      "url": "Tests/packages/*"
+    }
+  ],
   "require": {
     "php": ">=7.2",
     "typo3/cms-core": "~9.5.17 | ~10.4.2"
@@ -24,10 +30,10 @@
     "typo3/cms-tstemplate": "^10.4.2",
     "typo3/cms-backend": "^10.4.2",
     "typo3/cms-t3editor": "^10.4.2",
-    "phpstan/phpstan": "^0.11",
     "typo3/cms-lowlevel": "^10.4.2",
-    "codeception/codeception": "^3.1",
-    "codeception/phpbuiltinserver": "^1.5",
+    "codeception/codeception": "^4",
+    "codeception/phpbuiltinserver": "*",
+    "sudhaus7/test-site": "@dev",
     "helhum/typo3-console": "^6.0"
   },
   "extra": {
@@ -48,6 +54,8 @@
       "[ -L .Build/public/typo3conf/ext/responsive_picture ] || ln -snvf ../../../../. .Build/public/typo3conf/ext/responsive_picture",
       "vendor/bin/typo3cms install:generatepackagestates",
       "vendor/bin/typo3cms install:extensionsetupifpossible"
-    ]
+    ],
+    "compiledocumentation": "docker-compose run --rm t3docmake",
+
   }
 }
