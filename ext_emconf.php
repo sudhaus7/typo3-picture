@@ -2,16 +2,16 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => '(Sudhaus7) Responsive Picture',
-    'description' => 'Add media variations to the Image / filereference Element including crop support using the image and source tags with fallback to img',
+    'description' => 'Adds media variations to the Image / FileReference Element, automatically creates media variations and allows to define different images and crop-configurations per media query',
     'category' => 'fe',
-    'version' => '0.9.8',
+    'version' => '1.0.0',
     'state' => 'stable',
     'createDirs' => '',
     'upload_folder' => false,
     'clearcacheonload' => 0,
     'author' => 'Markus Hofmann & Frank Berger',
-    'author_email' => 'mhofmann@sudhaus7.de',
-    'author_company' => 'Sudhaus7, a B-Factor GmbH label',
+    'author_email' => 'fberger@sudhaus7.de',
+    'author_company' => 'Sudhaus7, a B-Factor GmbH label https://sudhaus7.de/',
     'constraints' => [
         'depends' => [
             'typo3' => '9.5.0-10.4.99'

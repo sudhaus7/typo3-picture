@@ -14,6 +14,8 @@ jobs:
       - name: cleanup
         run: |
           rm -rf Tests
+          rm -f docker-compose.yml
+          rm -rf .run
       - name: Publish to TER
         uses: the-coding-owl/action-typo3-extension-repository-upload@0.0.1
         env:
