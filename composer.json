@@ -23,15 +23,15 @@
   ],
   "require": {
     "php": ">=7.4",
-    "typo3/cms-core": "~10.4.2 | ~11.5.2"
+    "typo3/cms-core": "~10.4.2 | ^11.5"
   },
   "require-dev": {
-    "typo3/cms-fluid-styled-content": "^11.5.2",
-    "typo3/cms-tstemplate": "^11.5.2",
-    "typo3/cms-backend": "^11.5.2",
-    "typo3/cms-t3editor": "^11.5.2",
-    "typo3/cms-lowlevel": "^11.5.2",
-    "codeception/codeception": "^4",
+    "typo3/cms-fluid-styled-content": "^11.5",
+    "typo3/cms-tstemplate": "^11.5",
+    "typo3/cms-backend": "^11.5",
+    "typo3/cms-t3editor": "^11.5",
+    "typo3/cms-lowlevel": "^11.5",
+    "codeception/codeception": "*",
     "codeception/phpbuiltinserver": "*",
     "sudhaus7/test-site": "@dev",
     "helhum/typo3-console": "^6.0"
