@@ -1,6 +1,5 @@
 <?php
 
-
 namespace SUDHAUS7\TestSite\Domain\Model;
 
 use DateTime;
@@ -11,33 +10,32 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Comment extends AbstractEntity implements Guard7Interface
 {
     use Guard7Trait;
-    
+
     /**
      * @var int
      */
     protected $tstamp;
-    
-    
+
     /**
      * @var string
      */
     protected $commentor;
-    
+
     /**
      * @var string
      */
     protected $comment;
-    
+
     /**
      * @var DateTime
      */
     protected $date;
-    
+
     /**
      * @var Blog
      */
     protected $blog;
-    
+
     /**
      * @return string
      */
@@ -45,7 +43,7 @@ class Comment extends AbstractEntity implements Guard7Interface
     {
         return $this->commentor;
     }
-    
+
     /**
      * @param string $commentor
      */
@@ -53,7 +51,7 @@ class Comment extends AbstractEntity implements Guard7Interface
     {
         $this->commentor = $commentor;
     }
-    
+
     /**
      * @return string
      */
@@ -61,7 +59,7 @@ class Comment extends AbstractEntity implements Guard7Interface
     {
         return $this->comment;
     }
-    
+
     /**
      * @param string $comment
      */
@@ -69,7 +67,7 @@ class Comment extends AbstractEntity implements Guard7Interface
     {
         $this->comment = $comment;
     }
-    
+
     /**
      * @return Blog
      */
@@ -77,7 +75,7 @@ class Comment extends AbstractEntity implements Guard7Interface
     {
         return $this->blog;
     }
-    
+
     /**
      * @param Blog $blog
      */
@@ -85,7 +83,7 @@ class Comment extends AbstractEntity implements Guard7Interface
     {
         $this->blog = $blog;
     }
-    
+
     /**
      * @return DateTime
      */
@@ -93,13 +91,12 @@ class Comment extends AbstractEntity implements Guard7Interface
     {
         return $this->date;
     }
-    
 
     public function setDate(DateTime $date): void
     {
         $this->date = $date;
     }
-    
+
     /**
      * @return int
      */
@@ -107,7 +104,7 @@ class Comment extends AbstractEntity implements Guard7Interface
     {
         return $this->tstamp;
     }
-    
+
     /**
      * @param int $tstamp
      */

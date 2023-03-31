@@ -1,6 +1,5 @@
 <?php
 
-
 namespace SUDHAUS7\TestSite\Domain\Model;
 
 use DateTime;
@@ -8,33 +7,31 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Blog extends AbstractEntity
 {
-    
     /**
      * @var int
      */
     protected $tstamp;
-    
+
     /**
      * @var string
      */
     protected $title;
-    
+
     /**
      * @var DateTime
      */
     protected $date;
-    
+
     /**
      * @var string
      */
     protected $teaser;
-    
+
     /**
      * @var string
      */
     protected $bodytext;
-    
-    
+
     /**
      * @return string|null
      */
@@ -42,7 +39,7 @@ class Blog extends AbstractEntity
     {
         return $this->title;
     }
-    
+
     /**
      * @param string $title
      */
@@ -50,7 +47,7 @@ class Blog extends AbstractEntity
     {
         $this->title = $title;
     }
-    
+
     /**
      * @return DateTime|null
      */
@@ -58,7 +55,7 @@ class Blog extends AbstractEntity
     {
         return $this->date;
     }
-    
+
     /**
      * @param DateTime $date
      */
@@ -66,7 +63,7 @@ class Blog extends AbstractEntity
     {
         $this->date = $date;
     }
-    
+
     /**
      * @return string|null
      */
@@ -74,7 +71,7 @@ class Blog extends AbstractEntity
     {
         return $this->teaser;
     }
-    
+
     /**
      * @param string $teaser
      */
@@ -82,7 +79,7 @@ class Blog extends AbstractEntity
     {
         $this->teaser = $teaser;
     }
-    
+
     /**
      * @return string|null
      */
@@ -90,7 +87,7 @@ class Blog extends AbstractEntity
     {
         return $this->bodytext;
     }
-    
+
     /**
      * @param string $bodytext
      */
@@ -98,7 +95,7 @@ class Blog extends AbstractEntity
     {
         $this->bodytext = $bodytext;
     }
-    
+
     /**
      * @return int
      */
@@ -106,7 +103,7 @@ class Blog extends AbstractEntity
     {
         return $this->tstamp;
     }
-    
+
     /**
      * @param int $tstamp
      */

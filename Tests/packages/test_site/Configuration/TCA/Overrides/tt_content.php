@@ -22,10 +22,10 @@ call_user_func(function () {
         'Workshop Blog Detail',
         'EXT:test_site/Resources/Public/Icons/Extension.svg'
     );
-    
+
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['workshopblog_list'] = 'pi_flexform';
     ExtensionManagementUtility::addPiFlexFormValue('workshopblog_list', 'FILE:EXT:test_site/Configuration/Flexforms/Flexform.xml');
-    
+
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['workshopblog_latest'] = 'pi_flexform';
     ExtensionManagementUtility::addPiFlexFormValue('workshopblog_latest', 'FILE:EXT:test_site/Configuration/Flexforms/Flexform.xml');
 });

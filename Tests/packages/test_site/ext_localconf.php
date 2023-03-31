@@ -1,6 +1,5 @@
 <?php
 
-use SUDHAUS7\TestSite\Domain\Model\Blog;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 if (!defined('TYPO3_MODE')) {
@@ -34,12 +33,11 @@ ExtensionUtility::configurePlugin(
     'Detail',
     [
 
-        'Detail'=>'detail,savecomment'
+        'Detail'=>'detail,savecomment',
     ],
     [
 
-        'Detail'=>'detail,savecomment'
+        'Detail'=>'detail,savecomment',
     ],
     ExtensionUtility::PLUGIN_TYPE_PLUGIN
 );
-
