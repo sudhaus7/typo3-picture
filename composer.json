@@ -7,11 +7,13 @@
   "authors": [
     {
       "name": "Frank Berger",
-      "role": "Developer"
+      "role": "Developer",
+		"email": "fberger@code711.de"
     },
     {
       "name": "Markus Hofmann",
-      "role": "Developer"
+      "role": "Developer",
+		"email": "typo3@calien.de"
     }
   ],
   "repositories": [
@@ -23,8 +25,8 @@
   "require": {
     "php": ">=7.4 || >=8.0",
     "typo3/cms-core": "^11.5",
-    "typo3/cms-backend": "^11.5"
-
+    "typo3/cms-backend": "^11.5",
+	  "typo3/cms-fluid": "^11.5"
   },
   "require-dev": {
     "typo3/cms-fluid-styled-content": "^11.5",
@@ -36,7 +38,6 @@
     "sudhaus7/test-site": "@dev"
   },
   "suggest": {
-    "typo3/cms-fluid": "^11.5",
     "typo3/cms-tstemplate": "^11.5"
   },
   "extra": {
