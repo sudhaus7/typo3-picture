@@ -57,10 +57,9 @@ declare(strict_types=1);
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
+                'itemsProcFunc' => \SUDHAUS7\ResponsivePicture\TCA\MediaWidthItemProcFunc::class . '->getMediaWidth',
                 'items' => [
-                    ['LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.media_width.desktop', '(min-width: 1200px)'],
-                    ['LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.media_width.tablet', '(min-width: 768px)'],
-                    ['LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.media_width.mobile', '(min-width: 300px)'],
+                    ['', null],
                 ],
             ],
         ],
