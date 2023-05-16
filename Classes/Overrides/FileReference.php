@@ -58,7 +58,7 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
         $result = $db->select('*')
             ->from('sys_file_reference')
             ->where(
-                $db->expr()->andX(
+                $db->expr()->and(
                     $db->expr()->eq('uid_foreign', $properties['uid']),
                     $db->expr()->eq('tablenames', $db->quote('sys_file_reference')),
                     $db->expr()->eq('fieldname', $db->quote('picture_variants')),
@@ -68,32 +68,32 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
             ->executeQuery();
 
         $collectedMediaQuery = [];
-        $unsortedVariants = [];
         while ($row = $result->fetchAssociative()) {
             $variant = $this->factory->getFileReferenceObject($row['uid'], $row);
             $collectedMediaQuery[] = $variant->getProperties()['media_width'];
-            $unsortedVariants[] = $variant;
+            $this->variants[$variant->getProperties()['media_width']] = $variant;
         }
-        if (isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['autocreatevariations']) && (bool)$GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['autocreatevariations']) {
-            foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key => $config) {
+        $possibleVariants = $this->loadPossibleVariants(
+            $this->propertiesOfFileReference['tablenames'],
+            $this->propertiesOfFileReference['fieldname'],
+            $this->propertiesOfFileReference['uid_foreign']
+        );
+        if (
+            isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['autocreatevariations'])
+            && (bool)$GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['autocreatevariations']
+        ) {
+            foreach ($possibleVariants as $key => $config) {
                 if (!in_array($key, $collectedMediaQuery)) {
                     $variant = clone $this;
                     $variant->markAsVariation($key);
-                    $unsortedVariants[] = $variant;
+                    $this->variants[$key] = $variant;
                 }
+            $this->variants[$key]->mergedProperties['mediaQuery'] = $config['mediaQuery'] ?? '';
             }
         }
 
-        // second pass for sorting
-        if (isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.'])) {
-            foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key => $config) {
-                /** @var FileReference $variant */
-                foreach ($unsortedVariants as $variant) {
-                    if ($variant->getProperties()['media_width'] === $key) {
-                        $this->variants[] = $variant;
-                    }
-                }
-            }
+        foreach ($possibleVariants as $key => $config) {
+            $this->variants[$key]->mergedProperties['mediaQuery'] = $config['mediaQuery'] ?? '';
         }
 
         return $this->variants;
@@ -196,5 +196,42 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
             }
         }
         return '';
+    }
+
+    /**
+     * @throws Exception
+     * @return array<string, mixed>
+     */
+    private function loadPossibleVariants(string $table, string $field, int $uid): array
+    {
+        $possibleVariants = $GLOBALS['TCA']['sys_file_reference']['columns']['crop']['config']['cropVariants'] ??= [];
+
+        // table has no Types defined, early exit
+        if (!isset($GLOBALS['TCA'][$table]['ctrl']['type'])) {
+            return $possibleVariants;
+        }
+
+        $typeField = $GLOBALS['TCA'][$table]['ctrl']['type'];
+
+        $db = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable($table);
+        $result = $db
+            ->select(
+                [$typeField],
+                $table,
+                [
+                    'uid' => $uid,
+                ]
+            );
+        if (!($row = $result->fetchAssociative())) {
+            return $possibleVariants;
+        }
+        $type = $row[$typeField];
+
+        if (!isset($GLOBALS['TCA'][$table]['types'][$type]['columnsOverrides'][$field]['config']['cropVariants'])) {
+            return $possibleVariants;
+        }
+
+        return $GLOBALS['TCA'][$table]['types'][$type]['columnsOverrides'][$field]['config']['cropVariants'];
     }
 }

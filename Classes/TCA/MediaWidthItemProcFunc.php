@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 class MediaWidthItemProcFunc
 {
     /**
-     * @return array<int, array{0: string, 1: mixed}>
+     * @param array<int|string, mixed> $configuration
      */
     public function getMediaWidth(array &$configuration): void
     {
@@ -21,6 +21,8 @@ class MediaWidthItemProcFunc
                 $key,
             ];
         }
+        // unset first crop variant as this is the default
+        array_shift($itemsArray);
         ArrayUtility::mergeRecursiveWithOverrule(
             $configuration['items'],
             $itemsArray

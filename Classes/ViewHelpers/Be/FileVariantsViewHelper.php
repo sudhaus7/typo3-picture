@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace SUDHAUS7\ResponsivePicture\ViewHelpers\Be;
 
+use Doctrine\DBAL\Driver\Exception;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -38,8 +40,9 @@ class FileVariantsViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws \TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException
+     * @return array<int|string, mixed>
+     * @throws Exception
+     * @throws FileDoesNotExistException
      */
     public function render(): array
     {
@@ -97,7 +100,7 @@ class FileVariantsViewHelper extends AbstractViewHelper
 
     /**
      * @return array<int|string, mixed>
-     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      */
     private function getReferencedMediaVariants(int $referenceId): array
     {
@@ -117,9 +120,9 @@ class FileVariantsViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param array $cropVariants
+     * @param array<int|string, mixed> $cropVariants
      * @param File $image
-     * @return array
+     * @return array{cropVariants: array<int|string, mixed>, image: int, arguments: string, signature: string}
      */
     protected function getWizardPayload(array $cropVariants, File $image): array
     {
