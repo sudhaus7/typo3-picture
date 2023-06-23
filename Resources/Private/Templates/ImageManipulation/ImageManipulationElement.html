@@ -21,12 +21,17 @@
                                 <f:for as="cropVariant"  each="{config.cropVariants}" key="variant">
                                     <f:if condition="{pictureVariant.{variant}}">
                                         <f:then>
+                                            <input data-formengine-validation-rules="{formEngine.validation}" id="{formEngine.field.id}-{variant}"
+                                                   name="data[sys_file_reference][{pictureVariant.{variant}.uid}][crop]"
+                                                   type="hidden"
+                                                   value="{formEngine.field.value}"
+                                            />
                                             <button class="btn btn-default t3js-image-manipulation-trigger"
                                                     data-button-dismiss-text="{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.cancel')}"
                                                     data-button-preview-text="{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.preview')}"
                                                     data-button-save-text="{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.accept')}"
                                                     data-crop-variants="{pictureVariant.{variant}.cropVariants -> f:format.json()}"
-                                                    data-field="{formEngine.field.id}"
+                                                    data-field="{formEngine.field.id}-{variant}"
                                                     data-file-field="{config.file_field}"
                                                     data-image-uid="{pictureVariant.{variant}.image.uid}"
                                                     data-modal-title="{f:render(partial: 'ModalTitle', section:'Main', arguments: _all)}"

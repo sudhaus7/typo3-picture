@@ -76,7 +76,7 @@ class FileVariantsViewHelper extends AbstractViewHelper
             foreach ($referenceDataset as $variant) {
                 $variant['image'] = $resourceFactory->getFileObject($variant['uid_local']);
                 $wizardPayload = $this->getWizardPayload(
-                    $preparedPayloadArguments[$variant['media_width']],
+                    $preparedPayloadArguments[$variant['media_width']] ?? [],
                     $variant['image']
                 );
                 $variant['cropVariants'] = $preparedPayloadArguments[$variant['media_width']];
@@ -88,7 +88,7 @@ class FileVariantsViewHelper extends AbstractViewHelper
 
         if (count($mediaVariants['original']['cropVariants'] ?? []) > 0) {
             $mediaVariants['original']['wizardPayload'] = json_encode($this->getWizardPayload(
-                $mediaVariants['original']['cropVariants'],
+                $mediaVariants['original']['cropVariants'] ?? [],
                 $file
             ));
         } else {
@@ -131,7 +131,7 @@ class FileVariantsViewHelper extends AbstractViewHelper
             'cropVariants' => $cropVariants,
             'image' => $image->getUid(),
         ];
-        $uriArguments['arguments'] = json_encode($arguments);
+        $uriArguments['arguments'] = json_encode($arguments) ?: '';
         $uriArguments['signature'] = GeneralUtility::hmac((string)($uriArguments['arguments'] ?? ''), 'ajax_wizard_image_manipulation');
 
         return $uriArguments;
