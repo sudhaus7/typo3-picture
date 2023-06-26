@@ -27,11 +27,11 @@ class ManipulateCroppingReference
     }
 
     /**
-     * @param array<int, array<string, mixed>> $references
-     * @param int[] $variants
+     * @param array<int|string, array<string, mixed>> $references
+     * @param array<int|string, int|string> $variants
      * @return array<string, mixed>
      */
-    private function mergeCroppingInformation(array $references, array $variants, int $originalUid): array
+    private function mergeCroppingInformation(array $references, array $variants, int|string $originalUid): array
     {
         $original = $references[$originalUid];
         $croppingInfo = json_decode($original['crop'], true);
