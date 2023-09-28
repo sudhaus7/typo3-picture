@@ -36,7 +36,7 @@ New properties
 
         .. code-block:: html
 
-            <f:for each="{image.variations}" as="variation">
+            <f:for each="{image.variants}" as="variant">
                 do stuff
             </f:for>
 
@@ -60,8 +60,8 @@ New properties
 
         .. code-block:: html
 
-            <f:for each="{image.variations}" as="variation">
-                <f:if condition="{variation.variant}">
+            <f:for each="{image.variants}" as="variant">
+                <f:if condition="{variant.variant}">
                     do something conditionally
                 </f:if>
             </f:for>
@@ -87,7 +87,7 @@ New properties
 
         .. code-block:: html
 
-            <f:for each="{image.variations}" as="variation">
+            <f:for each="{image.variants}" as="variant">
                 <source media="{variant.mediaquery}" .. />
             </f:for>
 
@@ -111,7 +111,7 @@ New properties
 
         .. code-block:: html
 
-            <f:for each="{image.variations}" as="variation">
+            <f:for each="{image.variants}" as="variant">
                 <source srcset="{f:uri.image(image: '{variant}', maxWidth: '{variant.variationmaxwidth}')}">
             </f:for>
 
@@ -135,6 +135,6 @@ New properties
 
         .. code-block:: html
 
-            <f:for each="{image.variations}" as="variation">
+            <f:for each="{image.variants}" as="variant">
                 <source srcset="{f:uri.image(image: '{variant}', maxHeight: '{variant.variationmaxheight}')}">
             </f:for>
