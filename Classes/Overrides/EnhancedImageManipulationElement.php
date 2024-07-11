@@ -13,7 +13,7 @@ class EnhancedImageManipulationElement extends ImageManipulationElement
     public function __construct(NodeFactory $nodeFactory, array $data)
     {
         parent::__construct($nodeFactory, $data);
-        $this->templateView->setTemplatePathAndFilename(
+        $this->templateView->getRenderingContext()->getTemplatePaths()->setTemplatePathAndFilename(
             GeneralUtility::getFileAbsFileName(
                 'EXT:responsive_picture/Resources/Private/Templates/ImageManipulation/ImageManipulationElement.html'
             )

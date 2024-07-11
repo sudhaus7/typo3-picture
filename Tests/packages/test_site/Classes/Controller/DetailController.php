@@ -44,9 +44,9 @@ class DetailController extends ActionController
         $newcomment = new Comment();
 
         $this->view->assignMultiple([
-           'blog'=>$blog,
-           'comments'=>$this->commentRepository->findByBlog($blog),
-           'newcomment'=>$newcomment,
+            'blog' => $blog,
+            'comments' => $this->commentRepository->findByBlog($blog),
+            'newcomment' => $newcomment,
         ]);
     }
 
@@ -68,6 +68,6 @@ class DetailController extends ActionController
         }
 
         $this->commentRepository->add($comment);
-        $this->redirect('detail', null, null, ['blog'=>$comment->getBlog()]);
+        $this->redirect('detail', null, null, ['blog' => $comment->getBlog()]);
     }
 }

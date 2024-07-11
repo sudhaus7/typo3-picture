@@ -21,10 +21,10 @@ ExtensionUtility::configurePlugin(
     'SUDHAUS7.TestSite',
     'Latest',
     [
-        'Latest'=>'index',
+        'Latest' => 'index',
     ],
     [
-        'Latest'=>'index',
+        'Latest' => 'index',
     ],
     ExtensionUtility::PLUGIN_TYPE_PLUGIN
 );
@@ -33,11 +33,11 @@ ExtensionUtility::configurePlugin(
     'Detail',
     [
 
-        'Detail'=>'detail,savecomment',
+        'Detail' => 'detail,savecomment',
     ],
     [
 
-        'Detail'=>'detail,savecomment',
+        'Detail' => 'detail,savecomment',
     ],
     ExtensionUtility::PLUGIN_TYPE_PLUGIN
 );

@@ -70,15 +70,15 @@ return [
             ],
         ],
 
-        'blog'=> [
+        'blog' => [
             'label' => 'Blog',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tx_workshopblog_domain_model_blog',
-                'foreign_table'=> 'tx_workshopblog_domain_model_blog',
-                'minitems'=>1,
-                'maxitems'=>1,
+                'foreign_table' => 'tx_workshopblog_domain_model_blog',
+                'minitems' => 1,
+                'maxitems' => 1,
             ],
         ],
     ],
