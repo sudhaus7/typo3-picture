@@ -34,7 +34,7 @@ class ManipulateCroppingReference
     private function mergeCroppingInformation(array $references, array $variants, int|string $originalUid): array
     {
         $original = $references[$originalUid];
-        $croppingInfo = json_decode($original['crop'], true);
+        $croppingInfo = json_decode($original['crop'] ?? '', true);
         foreach ($variants as $variantId) {
             $variant = $references[$variantId] ?? [];
             if (isset($variant['crop'])) {
