@@ -19,7 +19,7 @@ class ManipulateCroppingReference
             if (!isset($reference['picture_variants'])) {
                 continue;
             }
-            $variants = GeneralUtility::intExplode(',', $reference['picture_variants']);
+            $variants = GeneralUtility::intExplode(',', (string)$reference['picture_variants']);
             $data['sys_file_reference'][$uid] = $this->mergeCroppingInformation($data['sys_file_reference'], $variants, $uid);
         }
 
