@@ -7,16 +7,19 @@ config.tx_responsivepicture {
 	autocreatevariations = 1
 	sizes {
 		default {
+			key = (min-width: 1200px)
 			mediaquery = (min-width: 1200px)
 			maxW = 1600
 			maxH = 1600
 		}
 		tablet {
+			key = (min-width: 768px)
 			mediaquery = (min-width: 768px)
 			maxW = 1024
 			maxH = 1024
 		}
 		mobile {
+			key = (min-width: 300px)
 			mediaquery = (min-width: 300px)
 			maxW = 600
 			maxH = 600
