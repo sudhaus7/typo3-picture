@@ -42,7 +42,9 @@
                             <div class="col-6 col-sm-4 col-md-3 media-gallery__item">
                                 <p>
                                     <b>
-                                        <f:translate id="{cropVariant.title}" default="{cropVariant.title}"/>
+                                        <f:if condition="{cropVariant.title}">
+                                            <f:translate id="{cropVariant.title}" default="{cropVariant.title}"/>
+                                        </f:if>
                                     </b><br/>
                                     <f:if condition="{cropVariant.allowedAspectRatios.{cropVariant.selectedRatio}.title}">
                                         <f:translate
