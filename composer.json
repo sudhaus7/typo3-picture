@@ -23,22 +23,22 @@
     }
   ],
   "require": {
-    "php": ">=7.4 || >=8.0",
-    "typo3/cms-core": "^12.4",
-    "typo3/cms-backend": "^12.4",
-	  "typo3/cms-fluid": "^12.4"
+    "php": ">=8.2",
+    "typo3/cms-core": "^13.4",
+    "typo3/cms-backend": "^13.4",
+	  "typo3/cms-fluid": "^13.4"
   },
   "require-dev": {
-    "typo3/cms-fluid-styled-content": "^12.4",
-    "typo3/cms-tstemplate": "^12.4",
-    "typo3/cms-t3editor": "^12.4",
-    "typo3/cms-lowlevel": "^12.4",
+    "typo3/cms-fluid-styled-content": "^13.4",
+    "typo3/cms-tstemplate": "^13.4",
+    "typo3/cms-t3editor": "^13.4",
+    "typo3/cms-lowlevel": "^13.4",
     "codeception/codeception": "^5",
     "codeception/phpbuiltinserver": "*",
     "sudhaus7/test-site": "@dev"
   },
   "suggest": {
-    "typo3/cms-tstemplate": "^12.4"
+    "typo3/cms-tstemplate": "^13.4"
   },
   "extra": {
     "typo3/cms": {

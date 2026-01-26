@@ -41,8 +41,8 @@ class FileVariantsViewHelper extends AbstractViewHelper
 
     /**
      * @return array<int|string, mixed>
-     * @throws Exception
      * @throws FileDoesNotExistException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function render(): array
     {
@@ -100,7 +100,7 @@ class FileVariantsViewHelper extends AbstractViewHelper
 
     /**
      * @return array<int|string, mixed>
-     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     private function getReferencedMediaVariants(int $referenceId): array
     {

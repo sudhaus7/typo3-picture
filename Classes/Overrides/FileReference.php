@@ -2,7 +2,9 @@
 
 namespace SUDHAUS7\ResponsivePicture\Overrides;
 
+use Doctrine\DBAL\Exception;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -12,26 +14,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
 {
-    /**
-     * @var string|null
-     */
-    protected $mediaquerykey;
-
-    /**
-     * @var array|null
-     */
-    protected $variants;
-
-    /**
-     * @var ResourceFactory
-     */
-    private $factory;
+    protected ?string $mediaquerykey = null;
+    protected ?array $variants = null;
+    private ResourceFactory $factory;
 
     /**
      * FileReference constructor.
      *
      * @param array $fileReferenceData
      * @param null $factory
+     * @throws FileDoesNotExistException
      */
     public function __construct(array $fileReferenceData, $factory = null)
     {
@@ -41,6 +33,7 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
 
     /**
      * @return array
+     * @throws Exception
      * @throws ResourceDoesNotExistException
      */
     public function getVariants(): array

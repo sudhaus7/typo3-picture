@@ -24,6 +24,9 @@ class MediaWidthItemProcFunc
             if (in_array($key, $removeItems)) {
                 continue;
             }
+            if (empty($variant['title'])) {
+                continue;
+            }
             $itemsArray[] = [
                 $variant['title'],
                 $key,
