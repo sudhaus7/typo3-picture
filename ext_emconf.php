@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 $EM_CONF[$_EXTKEY] = [
     'title' => '(Sudhaus7) Responsive Picture',
     'description' => 'Adds media variations to the Image / FileReference Element, automatically creates media variations and allows to define different images and crop-configurations per media query',
     'category' => 'fe',
-    'version' => '5.0.2',
+    'version' => '5.0.3',
     'state' => 'stable',
     'clearcacheonload' => 0,
     'author' => 'Markus Hofmann & Frank Berger',
