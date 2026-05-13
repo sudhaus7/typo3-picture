@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the TYPO3 project.
+ *
+ * @author Frank Berger <fberger@sudhaus7.de>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
+
 namespace SUDHAUS7\ResponsivePicture\ViewHelpers\Be;
 
 use Doctrine\DBAL\Exception;
@@ -17,9 +28,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class FileVariantsViewHelper extends AbstractViewHelper
 {
     protected $escapeOutput = false;
-    public function __construct(private readonly ResourceFactory $resourceFactory, private readonly ConnectionPool $connectionPool)
-    {
-    }
+    public function __construct(private readonly ResourceFactory $resourceFactory, private readonly ConnectionPool $connectionPool) {}
 
     public function initializeArguments(): void
     {
@@ -54,8 +63,8 @@ class FileVariantsViewHelper extends AbstractViewHelper
         /** @var File $file */
         $file = $this->arguments['file'];
         $fieldName = $this->arguments['fieldName'];
-        $payload = json_decode((string) $this->arguments['payload'], true);
-        $payloadArgs = json_decode((string) $payload['arguments'], true);
+        $payload = json_decode((string)$this->arguments['payload'], true);
+        $payloadArgs = json_decode((string)$payload['arguments'], true);
         $mediaVariants['original'] = [
             'wizardPayload' => json_encode($payload),
             'cropVariants' => $payloadArgs['cropVariants'],

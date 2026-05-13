@@ -8,7 +8,6 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'fe',
     'version' => '5.0.1',
     'state' => 'stable',
-    'upload_folder' => false,
     'clearcacheonload' => 0,
     'author' => 'Markus Hofmann & Frank Berger',
     'author_email' => 'fberger@sudhaus7.de',

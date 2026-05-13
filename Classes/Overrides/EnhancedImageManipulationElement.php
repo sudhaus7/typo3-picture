@@ -2,8 +2,20 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of the TYPO3 project.
+ *
+ * @author Frank Berger <fberger@sudhaus7.de>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
+
 namespace SUDHAUS7\ResponsivePicture\Overrides;
 
+use Override;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Backend\Form\Element\ImageManipulationElement;
 use TYPO3\CMS\Backend\Form\Event\ModifyImageManipulationPreviewUrlEvent;
@@ -24,10 +36,10 @@ class EnhancedImageManipulationElement extends ImageManipulationElement
         private readonly ResourceFactory $resourceFactory,
         private readonly HashService $hashService,
     ) {
-        parent::__construct($backendViewFactory,$uriBuilder,$eventDispatcher,$resourceFactory,$hashService);
+        parent::__construct($backendViewFactory, $uriBuilder, $eventDispatcher, $resourceFactory, $hashService);
     }
 
-    #[\Override]
+    #[Override]
     public function render(): array
     {
         $resultArray = $this->initializeResultArray();
@@ -58,7 +70,7 @@ class EnhancedImageManipulationElement extends ImageManipulationElement
             'fieldInformation' => $fieldInformationHtml,
             'fieldControl' => $fieldControlHtml,
             'fieldWizard' => $fieldWizardHtml,
-            'isAllowedFileExtension' => in_array(strtolower($file->getExtension()), GeneralUtility::trimExplode(',', strtolower((string) $config['allowedExtensions'])), true),
+            'isAllowedFileExtension' => in_array(strtolower($file->getExtension()), GeneralUtility::trimExplode(',', strtolower((string)$config['allowedExtensions'])), true),
             'image' => $file,
             'formEngine' => [
                 'field' => [

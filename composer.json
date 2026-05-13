@@ -23,7 +23,7 @@
     }
   ],
   "require": {
-    "php": ">=8.2",
+    "php": "^8.2",
     "typo3/cms-core": "^14.3",
     "typo3/cms-backend": "^14.3",
 	  "typo3/cms-fluid": "^14.3"
@@ -35,7 +35,10 @@
     "typo3/cms-lowlevel": "^14.3",
     "codeception/codeception": "^5",
     "codeception/phpbuiltinserver": "*",
-    "sudhaus7/test-site": "@dev"
+    "sudhaus7/test-site": "@dev",
+    "helhum/typo3-console": "*",
+    "typo3/coding-standards": "*",
+    "ssch/typo3-rector": "^3"
   },
   "suggest": {
     "typo3/cms-tstemplate": "^14.3"
@@ -45,7 +48,8 @@
       "extension-key": "responsive_picture",
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
       "web-dir": ".Build/public"
-    }
+    },
+
   },
   "autoload": {
     "psr-4": {
@@ -56,7 +60,6 @@
     "post-autoload-dump": [
     ],
     "compiledocumentation": "docker-compose run --rm t3docmake"
-
   },
   "config": {
     "allow-plugins": {
