@@ -22,7 +22,7 @@ This is a TYPO3 Extension which automatically creates media alternatives for an 
 
 In the TYPO3 Backend an image can have alternative images and crop configurations per media query added.
 
-For the Frontend a Fluid Partial is available as drop-in replacement for the Media/Rendering/Image Partial shipped with the fluid_styled_content extension in TYPO3 9 and 10.
+For the Frontend a Fluid Partial is available as drop-in replacement for the Media/Rendering/Image Partial shipped with the fluid_styled_content extension.
 
 An editor can select a part of an image for mobile display and a completely different image for the 4k Desktop.
 

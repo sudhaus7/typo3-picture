@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SUDHAUS7\TestSite\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;

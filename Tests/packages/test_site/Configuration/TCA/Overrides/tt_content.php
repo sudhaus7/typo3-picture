@@ -1,31 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
-call_user_func(function () {
+call_user_func(function (): void {
     ExtensionUtility::registerPlugin(
-        'SUDHAUS7.TestSite',
+        'TestSite',
         'List',
         'Workshop Blog List',
         'EXT:test_site/Resources/Public/Icons/Extension.svg'
     );
     ExtensionUtility::registerPlugin(
-        'SUDHAUS7.TestSite',
+        'TestSite',
         'Latest',
         'Workshop Blog Latest',
         'EXT:test_site/Resources/Public/Icons/Extension.svg'
     );
     ExtensionUtility::registerPlugin(
-        'SUDHAUS7.TestSite',
+        'TestSite',
         'Detail',
         'Workshop Blog Detail',
         'EXT:test_site/Resources/Public/Icons/Extension.svg'
     );
 
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['workshopblog_list'] = 'pi_flexform';
-    ExtensionManagementUtility::addPiFlexFormValue('workshopblog_list', 'FILE:EXT:test_site/Configuration/Flexforms/Flexform.xml');
+    ExtensionManagementUtility::addToAllTCAtypes('tt_content', '--div--;Configuration,pi_flexform,', 'workshopblog_list', 'after:subheader');
+    ExtensionManagementUtility::addPiFlexFormValue('*', 'FILE:EXT:test_site/Configuration/Flexforms/Flexform.xml', 'workshopblog_list');
 
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['workshopblog_latest'] = 'pi_flexform';
-    ExtensionManagementUtility::addPiFlexFormValue('workshopblog_latest', 'FILE:EXT:test_site/Configuration/Flexforms/Flexform.xml');
+    ExtensionManagementUtility::addToAllTCAtypes('tt_content', '--div--;Configuration,pi_flexform,', 'workshopblog_latest', 'after:subheader');
+    ExtensionManagementUtility::addPiFlexFormValue('*', 'FILE:EXT:test_site/Configuration/Flexforms/Flexform.xml', 'workshopblog_latest');
 });

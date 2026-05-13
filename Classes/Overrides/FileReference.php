@@ -68,10 +68,10 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
                     $unsortedvariants[] = $variant;
                 }
                 if (
-                    isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['autocreatevariations'])
-                    && (bool)$GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['autocreatevariations']
+                    isset($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['autocreatevariations'])
+                    && (bool)$GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['autocreatevariations']
                 ) {
-                    foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $k => $config) {
+                    foreach ($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'] as $config) {
                         if (isset($config['key']) && !in_array($config['key'], $collectedmediaquery)) {
                             $variant = clone $this;
                             $variant->markAsVariation($config['key']);
@@ -81,8 +81,8 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
                 }
 
                 // second pass for sorting
-                if (isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.'])) {
-                    foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $k => $config) {
+                if (isset($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.'])) {
+                    foreach ($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'] as $config) {
                         foreach ($unsortedvariants as $variant) {
                             if (isset($config['key']) && $variant->getProperties()['media_width'] === $config['key']) {
                                 $this->variants[] = $variant;
@@ -124,15 +124,15 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
     {
         if ($this->isVariant()) {
             if ($this->mediaquerykey !== null) {
-                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key => $config) {
+                foreach ($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'] as $config) {
                     if ($config['key'] === $this->mediaquerykey) {
                         return $config['mediaquery'];
                     }
                 }
             }
             $properties = $this->getProperties();
-            if (isset($properties['media_width']) && isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'])) {
-                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key => $config) {
+            if (isset($properties['media_width']) && isset($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'])) {
+                foreach ($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'] as $config) {
                     if ($config['key'] === $properties['media_width']) {
                         return $config['mediaquery'];
                     }
@@ -149,15 +149,15 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
     {
         if ($this->isVariant()) {
             if ($this->mediaquerykey !== null) {
-                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key => $config) {
+                foreach ($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'] as $config) {
                     if ($config['key'] === $this->mediaquerykey) {
                         return $config['maxW'];
                     }
                 }
             }
             $properties = $this->getProperties();
-            if (isset($properties['media_width']) && isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'])) {
-                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key => $config) {
+            if (isset($properties['media_width']) && isset($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'])) {
+                foreach ($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'] as $config) {
                     if ($config['key'] === $properties['media_width']) {
                         return $config['maxW'];
                     }
@@ -175,15 +175,15 @@ class FileReference extends \TYPO3\CMS\Core\Resource\FileReference
         $height = '';
         if ($this->isVariant()) {
             if ($this->mediaquerykey !== null) {
-                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key => $config) {
+                foreach ($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'] as $config) {
                     if ($config['key'] === $this->mediaquerykey) {
                         return $config['maxH'];
                     }
                 }
             }
             $properties = $this->getProperties();
-            if (isset($properties['media_width']) && isset($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'])) {
-                foreach ($GLOBALS['TSFE']->config['config']['tx_responsivepicture.']['sizes.'] as $key => $config) {
+            if (isset($properties['media_width']) && isset($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'])) {
+                foreach ($GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.typoscript')->getConfigArray()['tx_responsivepicture.']['sizes.'] as $config) {
                     if (isset($config['key']) && $config['key'] === $properties['media_width']) {
                         $height = $config['maxH'];
                     }

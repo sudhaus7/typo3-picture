@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+use SUDHAUS7\ResponsivePicture\TCA\MediaWidthItemProcFunc;
+use TYPO3\CMS\Core\Resource\FileType;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 (static function (): void {
     $GLOBALS['TCA']['sys_file_reference']['palettes']['variantsPalette'] = [
         'label' => 'LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.variantsPalette',
@@ -11,7 +15,7 @@ declare(strict_types=1);
     $GLOBALS['TCA']['sys_file_reference']['columns']['media_width']['label'] = 'LLL:EXT:responsive_picture/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.media_width';
     $GLOBALS['TCA']['sys_file_reference']['columns']['media_width']['config']['type'] = 'select';
     $GLOBALS['TCA']['sys_file_reference']['columns']['media_width']['config']['renderType'] = 'selectSingle';
-    $GLOBALS['TCA']['sys_file_reference']['columns']['media_width']['config']['itemsProcFunc'] = \SUDHAUS7\ResponsivePicture\TCA\MediaWidthItemProcFunc::class . '->getMediaWidth';
+    $GLOBALS['TCA']['sys_file_reference']['columns']['media_width']['config']['itemsProcFunc'] = MediaWidthItemProcFunc::class . '->getMediaWidth';
     if (empty($GLOBALS['TCA']['sys_file_reference']['columns']['media_width']['config']['items'])) {
         $GLOBALS['TCA']['sys_file_reference']['columns']['media_width']['config']['items'] = [
             ['', null]
@@ -30,15 +34,15 @@ declare(strict_types=1);
 
     // override child TCA for all file types
     $newColumns['picture_variants']['config']['overrideChildTca']['types'] = [];
-    foreach (\TYPO3\CMS\Core\Resource\FileType::cases() as $case) {
+    foreach (FileType::cases() as $case) {
         $newColumns['picture_variants']['config']['overrideChildTca']['types'][$case->value] = [
             'showitem' => '
                 --palette--;;variantsPalette,
                 --palette--;;filePalette',
         ];
     }
-    
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_file_reference', $newColumns);
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('sys_file_reference', 'imageoverlayPalette', '--linebreak--,picture_variants', 'after:crop');
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('sys_file_reference', 'variantsPalette', 'media_width', 'after:title');
+
+    ExtensionManagementUtility::addTCAcolumns('sys_file_reference', $newColumns);
+    ExtensionManagementUtility::addFieldsToPalette('sys_file_reference', 'imageoverlayPalette', '--linebreak--,picture_variants', 'after:crop');
+    ExtensionManagementUtility::addFieldsToPalette('sys_file_reference', 'variantsPalette', 'media_width', 'after:title');
 })();

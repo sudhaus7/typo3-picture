@@ -1,43 +1,46 @@
 <?php
 
+use SUDHAUS7\TestSite\Controller\ListController;
+use SUDHAUS7\TestSite\Controller\LatestController;
+use SUDHAUS7\TestSite\Controller\DetailController;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
-if (!defined('TYPO3_MODE')) {
+if (!defined('TYPO3')) {
     die();
 }
 
 ExtensionUtility::configurePlugin(
-    'SUDHAUS7.TestSite',
+    'TestSite',
     'List',
     [
-        'List' => 'index',
+        ListController::class => 'index',
     ],
     [
-        'List' => 'index',
+        ListController::class => 'index',
     ],
     ExtensionUtility::PLUGIN_TYPE_PLUGIN
 );
 ExtensionUtility::configurePlugin(
-    'SUDHAUS7.TestSite',
+    'TestSite',
     'Latest',
     [
-        'Latest' => 'index',
+        LatestController::class => 'index',
     ],
     [
-        'Latest' => 'index',
+        LatestController::class => 'index',
     ],
     ExtensionUtility::PLUGIN_TYPE_PLUGIN
 );
 ExtensionUtility::configurePlugin(
-    'SUDHAUS7.TestSite',
+    'TestSite',
     'Detail',
     [
 
-        'Detail' => 'detail,savecomment',
+        DetailController::class => 'detail,savecomment',
     ],
     [
 
-        'Detail' => 'detail,savecomment',
+        DetailController::class => 'detail,savecomment',
     ],
     ExtensionUtility::PLUGIN_TYPE_PLUGIN
 );

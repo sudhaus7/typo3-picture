@@ -27,6 +27,7 @@ class EnhancedImageManipulationElement extends ImageManipulationElement
         parent::__construct($backendViewFactory,$uriBuilder,$eventDispatcher,$resourceFactory,$hashService);
     }
 
+    #[\Override]
     public function render(): array
     {
         $resultArray = $this->initializeResultArray();
@@ -57,7 +58,7 @@ class EnhancedImageManipulationElement extends ImageManipulationElement
             'fieldInformation' => $fieldInformationHtml,
             'fieldControl' => $fieldControlHtml,
             'fieldWizard' => $fieldWizardHtml,
-            'isAllowedFileExtension' => in_array(strtolower($file->getExtension()), GeneralUtility::trimExplode(',', strtolower($config['allowedExtensions'])), true),
+            'isAllowedFileExtension' => in_array(strtolower($file->getExtension()), GeneralUtility::trimExplode(',', strtolower((string) $config['allowedExtensions'])), true),
             'image' => $file,
             'formEngine' => [
                 'field' => [

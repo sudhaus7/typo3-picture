@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'ctrl' => [
         'label' => 'commentor',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'delete' => 'deleted',
         'default_sortby' => 'date DESC',
         'adminOnly' => false,
@@ -16,9 +17,6 @@ return [
         ],
         'title' => 'Comment',
         'searchFields' => 'hidden,date,commentor,comment,blog',
-    ],
-    'interface' => [
-        'showRecordFieldList' => 'hidden,date,commentor,comment,blog',
     ],
     'palettes' => [],
     'types' => [
@@ -41,7 +39,7 @@ return [
                 'default' => 1,
                 'items' => [
                     [
-                        0 => '',
+                        'label' => '',
                         1 => '',
                         'invertStateDisplay' => true,
                     ],
@@ -57,9 +55,7 @@ return [
         'date' => [
             'label' => 'Date',
             'config' => [
-                'type' => 'input',
-                'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
             ],
         ],
 
@@ -74,7 +70,6 @@ return [
             'label' => 'Blog',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_workshopblog_domain_model_blog',
                 'foreign_table' => 'tx_workshopblog_domain_model_blog',
                 'minitems' => 1,

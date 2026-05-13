@@ -38,7 +38,7 @@ class ManipulateCroppingReference
         foreach ($variants as $variantId) {
             $variant = $references[$variantId] ?? [];
             if (isset($variant['crop'])) {
-                $variantCropping = json_decode($variant['crop'], true);
+                $variantCropping = json_decode((string) $variant['crop'], true);
                 $croppingInfo = array_replace($croppingInfo, $variantCropping);
             }
         }

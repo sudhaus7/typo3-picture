@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace SUDHAUS7\ResponsivePicture\ViewHelpers\Be;
 
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
+use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Resource\File;
@@ -16,6 +17,9 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class FileVariantsViewHelper extends AbstractViewHelper
 {
     protected $escapeOutput = false;
+    public function __construct(private readonly ResourceFactory $resourceFactory, private readonly ConnectionPool $connectionPool)
+    {
+    }
 
     public function initializeArguments(): void
     {
@@ -42,7 +46,7 @@ class FileVariantsViewHelper extends AbstractViewHelper
     /**
      * @return array<int|string, mixed>
      * @throws FileDoesNotExistException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function render(): array
     {
@@ -50,8 +54,8 @@ class FileVariantsViewHelper extends AbstractViewHelper
         /** @var File $file */
         $file = $this->arguments['file'];
         $fieldName = $this->arguments['fieldName'];
-        $payload = json_decode($this->arguments['payload'], true);
-        $payloadArgs = json_decode($payload['arguments'], true);
+        $payload = json_decode((string) $this->arguments['payload'], true);
+        $payloadArgs = json_decode((string) $payload['arguments'], true);
         $mediaVariants['original'] = [
             'wizardPayload' => json_encode($payload),
             'cropVariants' => $payloadArgs['cropVariants'],
@@ -71,7 +75,7 @@ class FileVariantsViewHelper extends AbstractViewHelper
             }
         }
         if ($sysFileReferenceId > 0) {
-            $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+            $resourceFactory = $this->resourceFactory;
             $referenceDataset = $this->getReferencedMediaVariants($sysFileReferenceId);
             foreach ($referenceDataset as $variant) {
                 $variant['image'] = $resourceFactory->getFileObject($variant['uid_local']);
@@ -100,11 +104,11 @@ class FileVariantsViewHelper extends AbstractViewHelper
 
     /**
      * @return array<int|string, mixed>
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     private function getReferencedMediaVariants(int $referenceId): array
     {
-        $db = GeneralUtility::makeInstance(ConnectionPool::class)
+        $db = $this->connectionPool
             ->getConnectionForTable('sys_file_reference');
         $statement = $db
             ->select(
@@ -132,7 +136,7 @@ class FileVariantsViewHelper extends AbstractViewHelper
             'image' => $image->getUid(),
         ];
         $uriArguments['arguments'] = json_encode($arguments) ?: '';
-        $uriArguments['signature'] = GeneralUtility::hmac((string)($uriArguments['arguments'] ?? ''), 'ajax_wizard_image_manipulation');
+        $uriArguments['signature'] = GeneralUtility::makeInstance(HashService::class)->hmac((string)($uriArguments['arguments'] ?? ''), 'ajax_wizard_image_manipulation');
 
         return $uriArguments;
     }

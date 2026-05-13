@@ -47,4 +47,3 @@ config.tx_extbase {
 tt_content.list.20.testsite_list = USER_INT
 tt_content.list.20.testsite_latest = USER_INT
 tt_content.list.20.testsite_detail = USER_INT
-

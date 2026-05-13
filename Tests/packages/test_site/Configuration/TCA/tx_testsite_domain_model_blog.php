@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'ctrl' => [
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'delete' => 'deleted',
         'default_sortby' => 'date DESC',
         'adminOnly' => false,
@@ -16,9 +17,6 @@ return [
         ],
         'title' => 'Blogentry',
         'searchFields' => 'hidden,date,title,teaser,bodytext',
-    ],
-    'interface' => [
-        'showRecordFieldList' => 'hidden,date,title,teaser,bodytext',
     ],
     'palettes' => [],
     'types' => [
@@ -41,7 +39,7 @@ return [
                 'default' => 1,
                 'items' => [
                     [
-                        0 => '',
+                        'label' => '',
                         1 => '',
                         'invertStateDisplay' => true,
                     ],
@@ -57,9 +55,7 @@ return [
         'date' => [
             'label' => 'Date',
             'config' => [
-                'type' => 'input',
-                'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
             ],
         ],
 

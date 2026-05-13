@@ -2,6 +2,7 @@
 
 namespace SUDHAUS7\TestSite\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use DateTime;
 
 use function strip_tags;
@@ -13,9 +14,6 @@ use SUDHAUS7\TestSite\Domain\Repository\BlogRepository;
 use SUDHAUS7\TestSite\Domain\Repository\CommentRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
-use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
-use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
 class DetailController extends ActionController
 {
@@ -28,26 +26,22 @@ class DetailController extends ActionController
      * @var CommentRepository
      */
     protected $commentRepository;
-
-    public function injectBlogRepository(BlogRepository $blogRepository)
+    public function __construct(BlogRepository $blogRepository, CommentRepository $commentRepository)
     {
         $this->blogRepository = $blogRepository;
-    }
-
-    public function injectCommentRepository(CommentRepository $commentRepository)
-    {
         $this->commentRepository = $commentRepository;
     }
 
-    public function detailAction(Blog $blog)
+    public function detailAction(Blog $blog): ResponseInterface
     {
         $newcomment = new Comment();
 
         $this->view->assignMultiple([
             'blog' => $blog,
-            'comments' => $this->commentRepository->findByBlog($blog),
+            'comments' => $this->commentRepository->findBy(['blog' => $blog]),
             'newcomment' => $newcomment,
         ]);
+        return $this->htmlResponse();
     }
 
     /**
@@ -59,8 +53,8 @@ class DetailController extends ActionController
     public function savecommentAction(Comment $comment)
     {
         $comment->setDate(new DateTime());
-        $comment->setComment(strip_tags($comment->getComment()));
-        $comment->setCommentor(strip_tags($comment->getCommentor()));
+        $comment->setComment(strip_tags((string) $comment->getComment()));
+        $comment->setCommentor(strip_tags((string) $comment->getCommentor()));
 
         if ($GLOBALS['TSFE']->loginUser) {
             $encodeStorage = GeneralUtility::makeInstance(AddLoggedInFrontendUserPublicKeySingleton::class);
@@ -68,6 +62,6 @@ class DetailController extends ActionController
         }
 
         $this->commentRepository->add($comment);
-        $this->redirect('detail', null, null, ['blog' => $comment->getBlog()]);
+        return $this->redirect('detail', null, null, ['blog' => $comment->getBlog()]);
     }
 }
