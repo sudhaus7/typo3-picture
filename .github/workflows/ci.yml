@@ -1,25 +1,16 @@
 name: Publish
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [published]
+
 
 jobs:
-  publish:
-    name: Publish to TER
+  TERUpload:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
     steps:
-      - name: Checkout code
-        uses: actions/checkout@master
-      - name: cleanup
-        run: |
-          rm -rf Tests
-          rm -f docker-compose.yml
-          rm -rf .run
-      - name: Publish to TER
-        uses: the-coding-owl/action-typo3-extension-repository-upload@0.0.1
-        env:
-          SECRET_USERNAME: ${{ secrets.USERNAME }}
-          SECRET_PASSWORD: ${{ secrets.PASSWORD }}
-          EXTENSION_KEY: 'responsive_picture'
-          UPLOAD_MESSAGE: ${{ github.event.head_commit.message }}
+      - uses: actions/checkout@v1
+      - uses: tomasnorre/typo3-upload-ter@v2
+        with:
+          api-token: ${{ secrets.TYPO3_API_TOKEN }}
