@@ -47,6 +47,7 @@ fabric.properties
 
 .scannerwork
 /.php_cs.cache
+/.php-cs-fixer.cache
 /.scannerwork/
 /composer.lock
 /.Build/
@@ -56,7 +57,7 @@ Tests/_output/*
 
 /*.php
 !/ext_*.php
-
+!/.php-cs-fixer.php
 /var
 /vendor
 /config

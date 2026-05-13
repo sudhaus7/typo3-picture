@@ -16,7 +16,6 @@ return [
             'disabled' => 'hidden',
         ],
         'title' => 'Blogentry',
-        'searchFields' => 'hidden,date,title,teaser,bodytext',
     ],
     'palettes' => [],
     'types' => [

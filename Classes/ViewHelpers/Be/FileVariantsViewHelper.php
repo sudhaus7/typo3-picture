@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace SUDHAUS7\ResponsivePicture\ViewHelpers\Be;
 
 use Doctrine\DBAL\Exception;
+use TYPO3\CMS\Core\Crypto\HashAlgo;
 use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
@@ -28,7 +29,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class FileVariantsViewHelper extends AbstractViewHelper
 {
     protected $escapeOutput = false;
-    public function __construct(private readonly ResourceFactory $resourceFactory, private readonly ConnectionPool $connectionPool) {}
+    public function __construct(private readonly ResourceFactory $resourceFactory, private readonly ConnectionPool $connectionPool, private readonly HashService $hashService) {}
 
     public function initializeArguments(): void
     {
@@ -145,7 +146,7 @@ class FileVariantsViewHelper extends AbstractViewHelper
             'image' => $image->getUid(),
         ];
         $uriArguments['arguments'] = json_encode($arguments) ?: '';
-        $uriArguments['signature'] = GeneralUtility::makeInstance(HashService::class)->hmac((string)($uriArguments['arguments'] ?? ''), 'ajax_wizard_image_manipulation');
+        $uriArguments['signature'] = $this->hashService->hmac((string)($uriArguments['arguments'] ?? ''), 'ajax_wizard_image_manipulation', HashAlgo::SHA3_256);
 
         return $uriArguments;
     }

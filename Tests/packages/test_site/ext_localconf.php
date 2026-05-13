@@ -17,8 +17,7 @@ ExtensionUtility::configurePlugin(
     ],
     [
         ListController::class => 'index',
-    ],
-    ExtensionUtility::PLUGIN_TYPE_PLUGIN
+    ]
 );
 ExtensionUtility::configurePlugin(
     'TestSite',
@@ -28,8 +27,7 @@ ExtensionUtility::configurePlugin(
     ],
     [
         LatestController::class => 'index',
-    ],
-    ExtensionUtility::PLUGIN_TYPE_PLUGIN
+    ]
 );
 ExtensionUtility::configurePlugin(
     'TestSite',
@@ -41,6 +39,5 @@ ExtensionUtility::configurePlugin(
     [
 
         DetailController::class => 'detail,savecomment',
-    ],
-    ExtensionUtility::PLUGIN_TYPE_PLUGIN
+    ]
 );

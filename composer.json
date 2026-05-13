@@ -48,8 +48,7 @@
       "extension-key": "responsive_picture",
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
       "web-dir": ".Build/public"
-    },
-
+    }
   },
   "autoload": {
     "psr-4": {

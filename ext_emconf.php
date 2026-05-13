@@ -6,7 +6,7 @@ $EM_CONF[$_EXTKEY] = [
     'title' => '(Sudhaus7) Responsive Picture',
     'description' => 'Adds media variations to the Image / FileReference Element, automatically creates media variations and allows to define different images and crop-configurations per media query',
     'category' => 'fe',
-    'version' => '5.0.1',
+    'version' => '5.0.2',
     'state' => 'stable',
     'clearcacheonload' => 0,
     'author' => 'Markus Hofmann & Frank Berger',
@@ -14,7 +14,7 @@ $EM_CONF[$_EXTKEY] = [
     'author_company' => 'Sudhaus7, a B-Factor GmbH label https://sudhaus7.de/',
     'constraints' => [
         'depends' => [
-            'typo3' => '14.0.0-14.3.99',
+            'typo3' => '14.0.0-14.4.99',
         ],
         'conflicts' => [
         ],

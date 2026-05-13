@@ -16,7 +16,6 @@ return [
             'disabled' => 'hidden',
         ],
         'title' => 'Comment',
-        'searchFields' => 'hidden,date,commentor,comment,blog',
     ],
     'palettes' => [],
     'types' => [
